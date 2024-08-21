@@ -51,7 +51,6 @@ import jsonData from '/root/data/acom_runbook_issues.json';
 | -------- | -------------- |
 | 0 | [**Environment Information and Configuration**](#0.-Configuration-and-environment-information) |
 | 0.1 | ### Step 0.1: Verify Database version
-
 1. **Database Configuration**: Run a Configurations details check.
    ```bash
    db2level > level.out
@@ -61,16 +60,13 @@ import jsonData from '/root/data/acom_runbook_issues.json';
   ```bash
    db2 connect to DBNAME
    db2 get db cfg for DBNAME > dbcfg.out
-    ```
-
-```bash
-   db2 "SELECT 'SELECT COUNT() AS row_count FROM ' || TABSCHEMA || '.' || TABNAME || ';'FROM SYSCAT.TABLES WHERE TYPE = 'T' " > tablecount.out
+db2 "SELECT 'SELECT COUNT() AS row_count FROM ' || TABSCHEMA || '.' || TABNAME || ';'FROM SYSCAT.TABLES WHERE TYPE = 'T' " > tablecount.out
    db2 -tvf tablecount.out -z tablecount.out1
-    ```
-  ```bash
 db2 "SELECT COUNT() AS TABLE_COUNT FROM SYSCAT.TABLES WHERE TYPE = 'T' AND TABSCHEMA NOT LIKE 'SYS%'"
-       ```
-| 1 | [**Pre-Req Database Indexes and relations check between Source database and Target database) |
+
+ 
+  ###__Database Configuration__
+| 1 | [**Pre-Req Database Indexes and relations check between Source database and Target database**] |
 | 1.1 | [&emsp; IBM](#1.1-ibm) |
 | 1.2 | [&emsp; ACOM](#1.2-acom) |
 | 2 | [**Request Access**](#2.-request-access) |
