@@ -1,5 +1,5 @@
 ---
-title: ACOM
+title: TARGET
 tabs:
   [
     "Overview",
@@ -13,11 +13,11 @@ tabs:
   ]
 ---
 
-# ACOM RUN-BOOK
+# TARGET RUN-BOOK
 
-## Click [here](https://github.ibm.com/Analytics-Cloud-Managed-Services/IACS-Issue-Tracking/issues/new?assignees=&labels=Runbook%2C+ORIGIN%3AIACS-WIKI%2C+CUST%3AACOM%2C+CustName%3AACOM&template=RunbookTemplate.md&title=%3CSpecify+Title+of+the+Runbook+crisp+and+clear%3E) to create new Runbook
+Target Corporation is an American retail corporation that operates a chain of discount department stores and hypermarkets, headquartered in Minneapolis, Minnesota. It is the seventh-largest retailer in the United States, and a component of the S&P 500 Index.[3] The company is one of the largest American-owned private employers in the United States.
 
-Created: June 27, 2023
+## Click [https://cloud.ibm.com/docs/mas-ms?topic=mas-ms-migration-from-maximo-saas-flex-or-on-premise]
 
 
 import jsonData from '/root/data/acom_runbook_issues.json';
@@ -49,10 +49,28 @@ import jsonData from '/root/data/acom_runbook_issues.json';
 ## High-Level Steps
 | S.NO     | Description   |
 | -------- | -------------- |
-| 0 | [**Install and Environment Information**](#0.-install-and-environment-information) |
-| 0.2 | [Software Stack and Versions](#0.2-software-stack-and-versions) |
-| 0.3 | [CP4D Components and Versions](#0.3-cp4d-components-and-versions) |
-| 1 | [**AWS Resources**](#1.-aws-resources) |
+| 0 | [**Environment Information and Configuration**](#0.-Configuration-and-environment-information) |
+| 0.1 | ### Step 0.1: Verify Database version
+
+1. **Database Configuration**: Run a Configurations details check.
+   ```bash
+   db2level > level.out
+   db2licm -l > licm.out
+   db2 get dbm cfg > dbmcfg.out
+   ```
+  ```bash
+   db2 connect to DBNAME
+   db2 get db cfg for DBNAME > dbcfg.out
+    ```
+
+```bash
+   db2 "SELECT 'SELECT COUNT() AS row_count FROM ' || TABSCHEMA || '.' || TABNAME || ';'FROM SYSCAT.TABLES WHERE TYPE = 'T' " > tablecount.out
+   db2 -tvf tablecount.out -z tablecount.out1
+    ```
+  ```bash
+db2 "SELECT COUNT() AS TABLE_COUNT FROM SYSCAT.TABLES WHERE TYPE = 'T' AND TABSCHEMA NOT LIKE 'SYS%'"
+       ```
+| 1 | [**Pre-Req Database Indexes and relations check between Source database and Target database) |
 | 1.1 | [&emsp; IBM](#1.1-ibm) |
 | 1.2 | [&emsp; ACOM](#1.2-acom) |
 | 2 | [**Request Access**](#2.-request-access) |
